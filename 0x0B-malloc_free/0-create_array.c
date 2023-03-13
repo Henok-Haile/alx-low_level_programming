@@ -3,12 +3,11 @@
 
 /*
  * create_array - A fucntion that creates an array of chars,
- *                and initailizes it with a specific char.
+ * and initailizes it with a specific char.
  *
  * @size: size of an array
  * @c: specific char
- * Return: returns NULL, if size = 0
- *         returns a pointer to the array, or NULL if it fails
+ * Return: pointer to chars
  */
 char *create_array(unsigned int size, char c)
 {
@@ -19,7 +18,7 @@ char *create_array(unsigned int size, char c)
 		return (NULL);
 
 	cr = malloc(sizeof(c) * size);
-	
+
 	if (cr == NULL)
 		return (NULL);
 
