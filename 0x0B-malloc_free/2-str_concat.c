@@ -33,7 +33,12 @@ char *str_concat(char *s1, char *s2)
 
 	k = 0;
 	for (k = 0; k <= j; k++)
-		ptrStr[i + k] = s2[k];
+	{
+		if (s2 == NULL)
+			ptrStr[i + k] = ' ';
+		else
+			ptrStr[i + k] = s2[k];
+	}
 
 	ptrStr[i + j + 1] = '\0';
 
