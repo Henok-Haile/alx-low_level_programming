@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 /**
- * print_number - A function that prints numbers, followed by a new line
+ * print_numbers - Ai function that prints numbers, followed by a new line
  *
  * @separator: separator
  * @n: number of integers passed to the function
@@ -12,6 +12,7 @@
  * You are allowed to use printf
  * If separator is NULL, don’t print it
  * Print a new line at the end of your function
+ * Return: nothing.
  */
 void print_numbers(const char *separator, const unsigned int n, ...)
 {
@@ -24,7 +25,7 @@ void print_numbers(const char *separator, const unsigned int n, ...)
 	for (i = 1; i <= n; i++)
 	{
 		printf("%d", va_arg(ap, int));
-		if(i != n)
+		if (i != n)
 			printf("%s", separator);
 	}
 	printf("\n");
