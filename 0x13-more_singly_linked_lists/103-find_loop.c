@@ -18,6 +18,12 @@ listint_t *find_listint_loop(listint_t *head)
 		Dtrav = Dtrav->next->next;
 		if (Ntrav == Dtrav)
 		{
+			Ntrav = head;
+			while (Ntrav != Dtrav)
+			{
+				Ntrav = Ntrav->next;
+				Dtrav = Dtrav->next;
+			}
 			return (Dtrav);
 		}
 	}
