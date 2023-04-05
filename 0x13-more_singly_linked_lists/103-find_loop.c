@@ -18,7 +18,7 @@ listint_t *find_listint_loop(listint_t *head)
 		Dtrav = Dtrav->next->next;
 		if (Ntrav == Dtrav)
 		{
-			return (Ntrav);
+			return (Dtrav);
 		}
 	}
 	return (NULL);
