@@ -12,7 +12,7 @@ listint_t *find_listint_loop(listint_t *head)
 	listint_t *Ntrav = head;
 	listint_t *Dtrav = head;
 
-	while ( Ntrav && Dtrav && Dtrav->next)
+	while (Ntrav && Dtrav && Dtrav->next)
 	{
 		Ntrav = Ntrav->next;
 		Dtrav = Dtrav->next->next;
