@@ -10,41 +10,43 @@
  */
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
-	if (key == NULL)
-		return 0;
+	hash_node_t *new;
+	char *value_copy;
+	unsigned long int index, i;
 
-	// Get the hash value for the key
-	unsigned long int hash = hash_djb2(key);
+	if (ht == NULL || key == NULL || *key == '\0' || value == NULL)
+		return (0);
 
-	// Calculate the index of the key in the hash table
-	unsigned long int index = hash % ht->size;
+	value_copy = strdup(value);
+	if (value_copy == NULL)
+		return (0);
 
-	// Check if the key already exists in the hash table
-	hash_node_t *node = ht->array[index];
-	while (node != NULL && strcmp(node->key, key) != 0)
+	index = key_index((const unsigned char *)key, ht->size);
+	for (i = index; ht->array[i]; i++)
 	{
-		node = node->next;
-	}
-
-	// If the key does not exist, create a new node and add it to the linked list at the index
-	if (node == NULL)
-	{
-		node = malloc(sizeof(hash_node_t));
-		if (node == NULL)
+		if (strcmp(ht->array[i]->key, key) == 0)
 		{
-			return 0;
+			free(ht->array[i]->value);
+			ht->array[i]->value = value_copy;
+			return (1);
 		}
-		node->key = strdup(key);
-		node->value = strdup(value);
-		node->next = ht->array[index];
-		ht->array[index] = node;
-	}
-	else
-	{
-		// If the key already exists, update the value
-		node->value = strdup(value);
 	}
 
-	// Return 1 to indicate success
-	return 1;
+	new = malloc(sizeof(hash_node_t));
+	if (new == NULL)
+	{
+		free(value_copy);
+		return (0);
+	}
+	new->key = strdup(key);
+	if (new->key == NULL)
+	{
+		free(new);
+		return (0);
+	}
+	new->value = value_copy;
+	new->next = ht->array[index];
+	ht->array[index] = new;
+
+	return (1);
 }
